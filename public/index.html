@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form action="/login" method="POST" id="loginForm" autocomplete="on">
+      <input type="text" name="username" placeholder="Username" required autocomplete="username" />
+
+      <!-- password wrapper -->
+      <div class="password-wrapper">
+        <input
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+          autocomplete="current-password"
+        />
+
+        <!-- toggle button (type=button so it doesn't submit the form) -->
+        <button
+          id="togglePassword"
+          class="toggle-password"
+          type="button"
+          aria-label="Show password"
+          aria-pressed="false"
+          title="Show password"
+        >
+          <!-- eye (visible) and eye-off (hidden) combined; we'll switch visibility with JS -->
+          <svg id="iconEye" viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- eye open -->
+            <g id="eyeOpen">
+              <path d="M12 5C7 5 2.73 8.11 1 12c1.73 3.89 6 7 11 7s9.27-3.11 11-7c-1.73-3.89-6-7-11-7zm0 11a4 4 0 110-8 4 4 0 010 8z"/>
+              <circle cx="12" cy="12" r="2.5"/>
+            </g>
+            <!-- eye closed (hidden) -->
+            <g id="eyeClosed" style="display:none">
+              <path d="M2 2l20 20-1.5 1.5L.5 3.5 2 2zM5.27 4.03L7 5.76C4.2 7.98 2.6 10.62 1.5 12c1.73 3.89 6 7 11 7 2.05 0 3.97-.45 5.63-1.23l1.62 1.62C18.88 19.13 15.57 20 12 20 7 20 2.73 16.89 1 12c.82-1.86 2.1-4.08 4.27-7.97z"/>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    // Toggle password visibility
+    (function () {
+      const pwd = document.getElementById('password');
+      const toggle = document.getElementById('togglePassword');
+      const iconEye = document.getElementById('iconEye');
+      const eyeOpen = iconEye.querySelector('#eyeOpen');
+      const eyeClosed = iconEye.querySelector('#eyeClosed');
+
+      toggle.addEventListener('click', function () {
+        const isHidden = pwd.type === 'password';
+        pwd.type = isHidden ? 'text' : 'password';
+
+        // Update aria and title for accessibility
+        toggle.setAttribute('aria-pressed', String(isHidden));
+        toggle.setAttribute('aria-label', isHidden ? 'Hide password' : 'Show password');
+        toggle.title = isHidden ? 'Hide password' : 'Show password';
+
+        // Switch which SVG group is visible
+        if (isHidden) {
+          eyeOpen.style.display = 'none';
+          eyeClosed.style.display = 'inline';
+        } else {
+          eyeOpen.style.display = 'inline';
+          eyeClosed.style.display = 'none';
+        }
+      });
+
+      // optional: allow toggle with Enter/Space when focused
+      toggle.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

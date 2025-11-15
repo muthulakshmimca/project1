@@ -1,0 +1,84 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #74ebd5, #acb6e5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+
+/* ensure previous styles (body, .login-container, inputs, button) remain as before */
+
+/* password wrapper styles */
+.password-wrapper {
+  position: relative;
+  width: 90%;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+}
+
+/* make input fill space */
+.password-wrapper input {
+  flex: 1;
+  padding-right: 40px; /* space for the icon button */
+  box-sizing: border-box;
+}
+
+/* toggle button inside the input */
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* remove default focus outline but keep an accessible focus ring */
+.toggle-password:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.2);
+  border-radius: 4px;
+}
+
+/* ensure toggle button doesn't grow the layout on small screens */
+.toggle-password svg {
+  display: block;
+  pointer-events: none;
+}
